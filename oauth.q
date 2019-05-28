@@ -28,7 +28,7 @@ k).oauth2.hmb:{x:$[10=@x;x;1_$x];p:{$[#y;y;x]}/'getenv@+`$_:\("HTTP";"NO"),\:"_P
   info:.oauth2.provider provider:.oauth2.domains[domain;`provider]; 
   param:enlist `response_type`client_id`redirect_uri`scope`access_type`prompt!(`code; info`client_id; .oauth2.baseurl; info`scope; `offline; `consent );
   /param: ([] response_type:1#`code; client_id:enlist info 1; redirect_uri:enlist BASEURL; scope: enlist info 2; access_type:1#`offline; prompt:1#`consent );
-  url:{y,"?",.oauth2.qs .DEBUG.PARAM:update state:x from z}[;info`auth_endpoint;param];
+  url:{y,"?",.oauth2.qs update state:x from z}[;info`auth_endpoint;param];
   state:`$"\001" sv (raze string 4?`8;string username);
   insert[`.oauth2.state] `state xkey enlist`state`username`created`provider`access_token`refresh_token`ok!(state;username;.z.p;provider;();();0b);
   url state
