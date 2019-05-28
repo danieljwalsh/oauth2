@@ -20,12 +20,12 @@
   last exec access_token from .oauth2.state where username=user
   };  
 
-/ Kdb needs a way to do this... lifting this directly from .Q.hmb so that it works like .Q.hg/hp
+
 k).oauth2.hmb:{x:$[10=@x;x;1_$x];p:{$[#y;y;x]}/'getenv@+`$_:\("HTTP";"NO"),\:"_PROXY";u:.Q.hap@x;t:~(~#*p)||/(*":"\:u 2)like/:{(("."=*x)#"*"),x}'","\:p 1;a:$[t;p:.Q.hap@*p;u]1; (4+*r ss d)_r:(-1!`$,/($[t;p;u]0 2))($y)," ",$[t;x;u 3]," HTTP/1.1",s,(s/:("Connection: close";"Host: ",u 2;"Authorization: Bearer ",z),((0<#a)#,$[t;"Proxy-";""],"Authorization: Basic ",((-c)_.Q.b6@,/64\:'256/:'"i"$0N 3#a,c#0),(c:.q.mod[-#a;3])#"=")),(d:s,s:"\r\n"),""};
 	
 .oauth2.startLoginFlow:{[username]
-  domain:`$last "@"vs string username; // extract the username from the email address
-  info:.oauth2.provider provider:.oauth2.domains[domain;`provider]; // exec first provider from `.oauth2.DOMAINS where domain=domain;
+  domain:`$last "@"vs string username; 
+  info:.oauth2.provider provider:.oauth2.domains[domain;`provider]; 
   param:enlist `response_type`client_id`redirect_uri`scope`access_type`prompt!(`code; info`client_id; .oauth2.baseurl; info`scope; `offline; `consent );
   /param: ([] response_type:1#`code; client_id:enlist info 1; redirect_uri:enlist BASEURL; scope: enlist info 2; access_type:1#`offline; prompt:1#`consent );
   url:{y,"?",.oauth2.qs .DEBUG.PARAM:update state:x from z}[;info`auth_endpoint;param];
