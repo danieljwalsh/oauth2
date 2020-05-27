@@ -4,7 +4,6 @@ OAuth2 kdb+
 Note the pre-requisites in the blog paper
 https://kx.com/blog/oauth2-authorization-using-kdb/
 
-Note the pre-requisites in the blog.
 In this example, the OAuth2 endpoint is to google. This can be configured at your google account,
 https://console.developers.google.com/
 Here, you can enable your OAuth2 'account', and in return you'll obtain a client ID & secret.
